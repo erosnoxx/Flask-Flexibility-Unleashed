@@ -1,9 +1,9 @@
 [default]
 SECRET_KEY = 'H5S#8#2@!9=68*9()876kKDH'
 SQLALCHEMY_TRACK_MODIFICATIONS = false
-EXTENSIONS = ['app.routes:init_app', 'app.extensions:init_app']
+EXTENSIONS = ['app.controllers.routes:init_app', 'app.controllers.extensions:init_app']
 STATIC_FOLDER = "static"
 
 
 [development]
-SQLALCHEMY_DATABASE_URI = "sqlite:///Hub.sqlite"
+SQLALCHEMY_DATABASE_URI = "sqlite:///Maps.sqlite"
