@@ -9,15 +9,15 @@ class User(db.Model):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
 
-    address = db.relationship('Address', foreign_keys='Address.address', backref='address', lazy='dynamic')
-    products = db.relationship('UserProduct', backref='products', lazy='dynamic')
+    addresses = db.relationship('Address', backref='users', lazy=True)
+    products = db.relationship('UserProduct', backref='products', lazy=True)
 
 
 class Address(db.Model):
     __tablename__ = 'address'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(32), nullable=False)
     state = db.Column(db.String(18), nullable=False)

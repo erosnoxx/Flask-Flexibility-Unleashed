@@ -6,16 +6,23 @@ class Categories(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    products = db.relationship('Products', backref='products', lazy='Dynamic')
 
 
 class Products(db.Model):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String(255), db.ForeignKey('categories.id'), nullable=False)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), unique=True, nullable=False)
     price = db.Column(db.Float(), nullable=False)
     stock = db.Column(db.Integer, nullable=False)
-    fabricated_at = db.Column(db.String(255))
-    users = db.relationship('UserProduct', backref='users', lazy='dynamic')
+    fabricated_at = db.Column(db.Date, nullable=False)
+
+    users = db.relationship('UserProduct', backref='users', lazy=True)
+    category = db.relationship('ProductsCategories', backref='category', lazy=True)
+
+class ProductsCategories(db.Model):
+    __tablename__ = 'productscategories'
+
+    id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)

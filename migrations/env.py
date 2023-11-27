@@ -1,7 +1,6 @@
 import logging
 from logging.config import fileConfig
-from app.models.users import *
-from app.models.products import *
+
 from flask import current_app
 
 from alembic import context
